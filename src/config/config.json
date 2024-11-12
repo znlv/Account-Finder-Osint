@@ -1,0 +1,15 @@
+{
+    "twitter": {
+        "bearer_token": ""
+    },
+    "instagram": {
+        "access_token": "YOUR_INSTAGRAM_ACCESS_TOKEN_HERE"
+    },
+    "google": {
+        "api_key": "YOUR_GOOGLE_API_KEY_HERE"
+    },
+    "aws": {
+        "access_key_id": "YOUR_AWS_ACCESS_KEY_ID_HERE",
+        "secret_access_key": "YOUR_AWS_SECRET_ACCESS_KEY_HERE"
+    }
+}
