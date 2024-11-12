@@ -2,10 +2,12 @@ import os
 import subprocess
 import json
 import time
+import requests
 
 func = "./src/func/"
 apis = "./src/apis/"
 config = "./src/config/"
+dedicatedtwitter = "./src/apis/twitter/"
 plats = {}
 
 
@@ -159,7 +161,44 @@ def acc():
  exit()
 
 def twitterprofile():
-    print("nigger")
+ slowprint(logo, speed='0.001', color='red')
+ username = input('Enter the Twitter Account you want info on: ')
+ event(twitter_bearer_token, username)
+
+
+
+
+def event(bearer_token, username):
+    url = f'https://api.twitter.com/2/users/by/username/{username}'
+    headers = {
+        'Authorization': f'Bearer {bearer_token}',  
+    }
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        user_data = response.json()  
+        user_info = {
+            "User Name": user_data['data']['name'],
+            "Username": user_data['data']['username'],
+            "Bio": user_data['data'].get('description', 'No bio available'),
+            "Location": user_data['data'].get('location', 'No location available'),
+            "Account Created At": user_data['data']['created_at'],
+        }
+        
+        print("User Profile Information:")
+        for key, value in user_info.items():
+            print(f"{key}: {value}")
+    
+    elif response.status_code == 404:
+        print("User does not exist.")
+    
+    elif response.status_code == 403:
+        print("Forbidden: Invalid Bearer Token.")
+    
+    else:
+        None
+
 
 
 def choicescreen():
